@@ -13,9 +13,11 @@ import CoreData
 public class PhoneBook: NSManagedObject {
     
     public static let className = "PhoneBook"
+    
     public enum Key {
         static let name = "name"
         static let phoneNumber = "phoneNumber"
+        static let image = "image"
     }
 
 }
