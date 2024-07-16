@@ -18,8 +18,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
         
+        // 메인 뷰컨트롤러 인스턴스 생성
+        let mainViewController = ViewController()
+        
+        // 네비게이션 컨트롤러 생성
+        let navigationController = UINavigationController(rootViewController: mainViewController)
+        
         // window 에게 루트 뷰 지정.
-        window.rootViewController = ViewController()
+        window.rootViewController = navigationController
         
         // 이 메서드를 반드시 작성해줘야 윈도우가 활성화 됨.
         window.makeKeyAndVisible()

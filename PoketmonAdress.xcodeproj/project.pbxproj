@@ -13,11 +13,12 @@
 		04B7C2142C452CA40054BF88 /* PoketmonAdress.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 04B7C2122C452CA40054BF88 /* PoketmonAdress.xcdatamodeld */; };
 		04B7C2162C452CA60054BF88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 04B7C2152C452CA60054BF88 /* Assets.xcassets */; };
 		04B7C2192C452CA60054BF88 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 04B7C2182C452CA60054BF88 /* Base */; };
-		04B7C2222C452D670054BF88 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 04B7C2212C452D670054BF88 /* SnapKit */; };
 		04B7C2242C4534180054BF88 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B7C2232C4534180054BF88 /* TableViewCell.swift */; };
 		04B7C22B2C4559930054BF88 /* PhoneBook+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B7C2292C4559930054BF88 /* PhoneBook+CoreDataClass.swift */; };
 		04B7C22C2C4559930054BF88 /* PhoneBook+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B7C22A2C4559930054BF88 /* PhoneBook+CoreDataProperties.swift */; };
 		04B7C22E2C4605060054BF88 /* PokeFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B7C22D2C4605060054BF88 /* PokeFile.swift */; };
+		04B7C2302C460E5A0054BF88 /* PhoneBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B7C22F2C460E5A0054BF88 /* PhoneBookViewController.swift */; };
+		04B7C2342C4691800054BF88 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 04B7C2332C4691800054BF88 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		04B7C2292C4559930054BF88 /* PhoneBook+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhoneBook+CoreDataClass.swift"; sourceTree = "<group>"; };
 		04B7C22A2C4559930054BF88 /* PhoneBook+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhoneBook+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		04B7C22D2C4605060054BF88 /* PokeFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeFile.swift; sourceTree = "<group>"; };
+		04B7C22F2C460E5A0054BF88 /* PhoneBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneBookViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,7 +42,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				04B7C2222C452D670054BF88 /* SnapKit in Frameworks */,
+				04B7C2342C4691800054BF88 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				04B7C20D2C452CA40054BF88 /* ViewController.swift */,
+				04B7C22F2C460E5A0054BF88 /* PhoneBookViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -122,7 +125,7 @@
 			);
 			name = PoketmonAdress;
 			packageProductDependencies = (
-				04B7C2212C452D670054BF88 /* SnapKit */,
+				04B7C2332C4691800054BF88 /* SnapKit */,
 			);
 			productName = PoketmonAdress;
 			productReference = 04B7C2062C452CA40054BF88 /* PoketmonAdress.app */;
@@ -181,6 +184,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04B7C2302C460E5A0054BF88 /* PhoneBookViewController.swift in Sources */,
 				04B7C22E2C4605060054BF88 /* PokeFile.swift in Sources */,
 				04B7C2242C4534180054BF88 /* TableViewCell.swift in Sources */,
 				04B7C20E2C452CA40054BF88 /* ViewController.swift in Sources */,
@@ -414,7 +418,7 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		04B7C2212C452D670054BF88 /* SnapKit */ = {
+		04B7C2332C4691800054BF88 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 04B7C2202C452D670054BF88 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;

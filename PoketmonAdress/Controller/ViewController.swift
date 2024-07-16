@@ -22,11 +22,12 @@ class ViewController: UIViewController {
         return label
     }()
     
-    private let addButton: UIButton = {
+    private lazy var addButton: UIButton = {
         let button = UIButton()
         button.setTitle("추가", for: .normal)
         button.setTitleColor(.black, for: .normal)
-//        button.addTarget(<#T##target: Any?##Any?#>, action: <#T##Selector#>, for: <#T##UIControl.Event#>)
+        // 타겟은 인스턴스로
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchDown)
         return button
     }()
     
@@ -46,15 +47,25 @@ class ViewController: UIViewController {
     }
     
     // MARK: - CoreData
-//    private func coreDataSet() {
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        self.container = appDelegate.persistentContainer
-//        createData(name: "name", phoneNumber: "010-1111-2222")
-//        
-//    }
-//    
+    //    private func coreDataSet() {
+    //        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    //        self.container = appDelegate.persistentContainer
+    //        createData(name: "name", phoneNumber: "010-1111-2222")
+    //
+    //    }
+    //
+    
+    // MARK: - viewWillAppear
+    override func viewWillAppear(_ animated: Bool) {
+        print("viewWillAppear")
+        navigationController?.navigationBar.isHidden = true
+    }
+    
     // MARK: - configureUI
     private func configureUI() {
+        
+        
+        
         view.backgroundColor = .white
         [
             mainPageLabel,
@@ -66,7 +77,7 @@ class ViewController: UIViewController {
         // MARK: - 레이아웃
         mainPageLabel.snp.makeConstraints {
             $0.centerX.equalToSuperview()
-            $0.top.equalToSuperview().inset(70)
+            $0.top.equalToSuperview().inset(65)
         }
         
         addButton.snp.makeConstraints {
@@ -81,9 +92,14 @@ class ViewController: UIViewController {
             $0.bottom.equalToSuperview().inset(50)
         }
     }
+    @objc
+    private func buttonTapped() {
+        let phoneBookViewController = PhoneBookViewController()
+        self.navigationController?.pushViewController(phoneBookViewController, animated: true)
+    }
 }
 
-    // MARK: - 확장
+// MARK: - 확장
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         80
@@ -102,9 +118,10 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         8
     }
+    
 }
 
 #Preview {
- let name = ViewController()
- return name
+    let name = ViewController()
+    return name
 }
