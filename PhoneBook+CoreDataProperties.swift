@@ -8,6 +8,7 @@
 
 import Foundation
 import CoreData
+import UIKit
 
 
 extension PhoneBook {
@@ -18,7 +19,7 @@ extension PhoneBook {
 
     @NSManaged public var name: String?
     @NSManaged public var phoneNumber: String?
-    @NSManaged public var image: String?
+    @NSManaged public var image: Data?
 
 }
 

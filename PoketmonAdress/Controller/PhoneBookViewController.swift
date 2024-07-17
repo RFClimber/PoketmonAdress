@@ -7,8 +7,11 @@
 
 import UIKit
 import SnapKit
+import CoreData
 
 class PhoneBookViewController: UIViewController {
+    
+    var container: NSPersistentContainer!
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -44,7 +47,9 @@ class PhoneBookViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureNavigationBar()
+        coreDataSet()
         configureUI()
+        
 
         
     }
@@ -115,19 +120,106 @@ class PhoneBookViewController: UIViewController {
         }
     }
     
+    // MARK: - API 통신
+    // 포켓몬 정보를 불러오는 메서드
+    private func fetchData<T: Decodable>(url: URL, completion: @escaping (T?) -> Void) {
+        let session = URLSession(configuration: .default)
+        session.dataTask(with: URLRequest(url: url)) { data, response, error in
+            guard let data, error == nil else {
+                print("데이터 로드 실패")
+                completion(nil)
+                return
+            }
+            let successRange = 200..<300
+            if let response = response as? HTTPURLResponse, successRange.contains(response.statusCode) {
+                guard let decodedData = try? JSONDecoder().decode(T.self, from: data) else {
+                    print("JSON 디코딩 실패")
+                    print("받은 데이터: \(String(data: data, encoding: .utf8) ?? "nil")")
+                    completion(nil)
+                    return
+                }
+                completion(decodedData)
+            } else {
+                print("응답 오류")
+                completion(nil)
+            }
+        }.resume()
+    }
     
+    private func fetchPoketmonData() {
+        let randomPoketmon: Int = .random(in: 1...1000)
+        let urlComponents = URLComponents(string: "https://pokeapi.co/api/v2/pokemon/\(randomPoketmon)/")
+        
+        guard let url = urlComponents?.url else {
+            print("잘못된 url")
+            return
+        }
+        
+        fetchData(url: url) { [weak self] (result: PokeFile?) in
+            guard let self, let result else { return }
+            
+            guard let imageURL = URL(string: result.sprites.front_default) else {
+                print("잘못된 이미지 url")
+                return
+            }
+            
+            self.fetchImage(url: imageURL)
+        }
+    }
+    
+    private func fetchImage(url: URL) {
+        let session = URLSession(configuration: .default)
+        session.dataTask(with: url ) { data, response, error in
+            guard let data = data, error == nil else {
+                print("이미지 로드 실패")
+                return
+            }
+            if let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    self.image.image = image
+                }
+            }
+        }.resume()
+    }
+    
+    // MARK: - CoreData
+    private func coreDataSet() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.container = appDelegate.persistentContainer
+    }
+
+    private func createData(name: String, phoneNumber: String, image: UIImage?) {
+        guard let entity = NSEntityDescription.entity(forEntityName: "PhoneBook", in: self.container.viewContext) else {
+            return
+        }
+        let newPhoneBook = NSManagedObject(entity: entity, insertInto: self.container.viewContext)
+        newPhoneBook.setValue(name, forKey: "name")
+        newPhoneBook.setValue(phoneNumber, forKey: "phoneNumber")
+        if let imageData = image?.pngData() {
+            newPhoneBook.setValue(imageData, forKey: "image")
+        }
+        
+        do {
+            try self.container.viewContext.save()
+            print("문맥 저장 성공")
+        } catch {
+            print("문맥 저장 실패")
+        }
+    }
+
     @objc
     private func applyButtonTapped() {
-        
+        createData(name: self.nameTextView.text ?? "", phoneNumber: self.phoneNumberTextView.text ?? "", image: self.image.image)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @objc
     private func randImgGenButtonTapped() {
-        
+        fetchPoketmonData()
     }
 }
 
-#Preview {
-    let name = PhoneBookViewController()
-    return name
-}
+//#Preview {
+//    let name = PhoneBookViewController()
+//    return name
+//}

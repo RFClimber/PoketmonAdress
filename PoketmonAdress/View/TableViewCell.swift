@@ -7,17 +7,20 @@
 
 import UIKit
 import SnapKit
+import CoreData
 
 final class TableViewCell: UITableViewCell {
     
+    var container: NSPersistentContainer!
+    
     static let id = "TableViewCell"
     
-    private let image: UIImageView = {
+    private let poketmonImage: UIImageView = {
         let imageView = UIImageView()
         imageView.backgroundColor = .white
         imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 35
-        imageView.layer.borderColor = UIColor.black.cgColor
+        imageView.layer.borderColor = UIColor.lightGray.cgColor
         imageView.layer.borderWidth = 1
         return imageView
     }()
@@ -29,7 +32,7 @@ final class TableViewCell: UITableViewCell {
         return label
     }()
     
-    private let phonNumberLabel: UILabel = {
+    private let phoneNumberLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.font = .systemFont(ofSize: 17)
@@ -48,12 +51,12 @@ final class TableViewCell: UITableViewCell {
     private func configureUI() {
         contentView.backgroundColor = .white
         [
-            image,
+            poketmonImage,
             nameLabel,
-            phonNumberLabel
+            phoneNumberLabel
         ].forEach { contentView.addSubview($0) }
         
-        image.snp.makeConstraints {
+        poketmonImage.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().inset(10)
             $0.width.height.equalTo(70)
@@ -61,22 +64,29 @@ final class TableViewCell: UITableViewCell {
         
         nameLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.trailing.equalTo(image.snp.trailing).offset(70)
+            $0.trailing.equalTo(poketmonImage.snp.trailing).offset(70)
         }
         
-        phonNumberLabel.snp.makeConstraints {
+        phoneNumberLabel.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.trailing.equalToSuperview().inset(30)
         }
     }
     
-    public func configureCell() {
-        nameLabel.text = "name"
-        phonNumberLabel.text = "010-1111-2222"
+    public func configureCell(with phoneBook: PhoneBook) {
+        nameLabel.text = phoneBook.name
+        phoneNumberLabel.text = phoneBook.phoneNumber
+        
+        if let imageData = phoneBook.image, let image = UIImage(data: imageData) {
+            poketmonImage.image = image
+        } else {
+            poketmonImage.image = nil
+            print("이미지 로드 실패")
+        }
     }
 }
 
-#Preview {
- let name = ViewController()
- return name
-}
+//#Preview {
+// let name = ViewController()
+// return name
+//}

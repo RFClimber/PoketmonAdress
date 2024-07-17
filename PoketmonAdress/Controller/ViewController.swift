@@ -12,6 +12,7 @@ import CoreData
 class ViewController: UIViewController {
     
     var container: NSPersistentContainer!
+    var phoneBooks: [PhoneBook] = []
     
     // MARK: - UI 생성
     private let mainPageLabel: UILabel = {
@@ -43,21 +44,15 @@ class ViewController: UIViewController {
     // MARK: - ViewDidLoad
     override func viewDidLoad() {
         super.viewDidLoad()
+        coreDataSet()
         configureUI()
     }
     
-    // MARK: - CoreData
-    //    private func coreDataSet() {
-    //        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    //        self.container = appDelegate.persistentContainer
-    //        createData(name: "name", phoneNumber: "010-1111-2222")
-    //
-    //    }
-    //
     
     // MARK: - viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
         print("viewWillAppear")
+        fetchPhoneBooks()
         navigationController?.navigationBar.isHidden = true
     }
     
@@ -92,6 +87,24 @@ class ViewController: UIViewController {
             $0.bottom.equalToSuperview().inset(50)
         }
     }
+    // MARK: - CoreData
+    private func coreDataSet() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.container = appDelegate.persistentContainer
+    }
+    
+    private func fetchPhoneBooks() {
+            let context = container.viewContext
+            let fetchRequest: NSFetchRequest<PhoneBook> = PhoneBook.fetchRequest()
+
+            do {
+                phoneBooks = try context.fetch(fetchRequest)
+                tableView.reloadData()
+            } catch {
+                print("Fetch failed")
+            }
+        }
+    
     @objc
     private func buttonTapped() {
         let phoneBookViewController = PhoneBookViewController()
@@ -111,17 +124,18 @@ extension ViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: TableViewCell.id) as? TableViewCell else {
             return UITableViewCell()
         }
-        cell.configureCell()
+        let phoneBook = phoneBooks[indexPath.row]
+        cell.configureCell(with: phoneBook)
         return cell
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        8
+        phoneBooks.count
     }
     
 }
 
-#Preview {
-    let name = ViewController()
-    return name
-}
+//#Preview {
+//    let name = ViewController()
+//    return name
+//}
