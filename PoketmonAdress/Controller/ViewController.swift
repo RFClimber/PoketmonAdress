@@ -97,6 +97,10 @@ class ViewController: UIViewController {
             let context = container.viewContext
             let fetchRequest: NSFetchRequest<PhoneBook> = PhoneBook.fetchRequest()
 
+            // 이름순으로 정렬
+            let sortDescriptor = NSSortDescriptor(key: "name", ascending: true)
+            fetchRequest.sortDescriptors = [sortDescriptor]
+        
             do {
                 phoneBooks = try context.fetch(fetchRequest)
                 tableView.reloadData()
