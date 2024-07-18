@@ -27,6 +27,7 @@ class PhoneBookViewController: UIViewController {
         image.contentMode = .scaleAspectFit
         image.layer.cornerRadius = 75
         image.layer.borderWidth = 3
+        image.clipsToBounds = true
         image.layer.borderColor = UIColor.lightGray.cgColor
         return image
     }()
@@ -219,9 +220,33 @@ class PhoneBookViewController: UIViewController {
         }
     }
 
+    private func updateData(name: String, phoneNumber: String, image: UIImage?) {
+        guard let phoneBook = phoneBook else { return }
+        
+        phoneBook.name = name
+        phoneBook.phoneNumber = phoneNumber
+        if let imageData = image?.pngData() {
+            phoneBook.image = imageData
+        }
+        
+        do {
+            try container.viewContext.save()
+            print("데이터 업데이트 성공")
+        } catch {
+            print("데이터 업데이트 실패")
+        }
+    }
+    
     @objc
     private func applyButtonTapped() {
-        createData(name: self.nameTextView.text ?? "", phoneNumber: self.phoneNumberTextView.text ?? "", image: self.image.image)
+        let name = self.nameTextView.text ?? ""
+        let phoneNumber = self.phoneNumberTextView.text ?? ""
+        let image = self.image.image
+        if phoneBook != nil {
+            updateData(name: name, phoneNumber: phoneNumber, image: image)
+        } else {
+            createData(name: name, phoneNumber: phoneNumber, image: image)
+        }
         self.navigationController?.popViewController(animated: true)
     }
     
