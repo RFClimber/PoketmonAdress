@@ -20,6 +20,7 @@ final class TableViewCell: UITableViewCell {
         imageView.backgroundColor = .white
         imageView.contentMode = .scaleAspectFit
         imageView.layer.cornerRadius = 35
+        imageView.clipsToBounds = true
         imageView.layer.borderColor = UIColor.lightGray.cgColor
         imageView.layer.borderWidth = 1
         return imageView

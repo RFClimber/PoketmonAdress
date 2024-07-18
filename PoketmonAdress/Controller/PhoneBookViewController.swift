@@ -12,6 +12,7 @@ import CoreData
 class PhoneBookViewController: UIViewController {
     
     var container: NSPersistentContainer!
+    var phoneBook: PhoneBook?
     
     private let titleLabel: UILabel = {
         let label = UILabel()
@@ -49,6 +50,7 @@ class PhoneBookViewController: UIViewController {
         configureNavigationBar()
         coreDataSet()
         configureUI()
+        displayPhoneBookDetail()
         
 
         
@@ -64,6 +66,16 @@ class PhoneBookViewController: UIViewController {
         textView.font = .systemFont(ofSize: 20)
         textView.textColor = .black
         return textView
+    }
+    
+    private func displayPhoneBookDetail() {
+        guard let phoneBook = phoneBook else { return }
+        nameTextView.text = phoneBook.name
+        phoneNumberTextView.text = phoneBook.phoneNumber
+        titleLabel.text = phoneBook.name
+        if let imageData = phoneBook.image, let savedimage = UIImage(data: imageData) {
+            image.image = savedimage
+        }
     }
     
     

@@ -51,7 +51,6 @@ class ViewController: UIViewController {
     
     // MARK: - viewWillAppear
     override func viewWillAppear(_ animated: Bool) {
-        print("viewWillAppear")
         fetchPhoneBooks()
         navigationController?.navigationBar.isHidden = true
     }
@@ -120,6 +119,14 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         80
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedPhoneBook = phoneBooks[indexPath.row]
+        let detailViewController = PhoneBookViewController()
+        detailViewController.container = self.container
+        detailViewController.phoneBook = selectedPhoneBook
+        self.navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 

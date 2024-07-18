@@ -19,6 +19,7 @@
 		04B7C22E2C4605060054BF88 /* PokeFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B7C22D2C4605060054BF88 /* PokeFile.swift */; };
 		04B7C2302C460E5A0054BF88 /* PhoneBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B7C22F2C460E5A0054BF88 /* PhoneBookViewController.swift */; };
 		04B7C2342C4691800054BF88 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 04B7C2332C4691800054BF88 /* SnapKit */; };
+		04B7C2382C4838820054BF88 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04B7C2372C4838820054BF88 /* MainView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,7 @@
 		04B7C22A2C4559930054BF88 /* PhoneBook+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PhoneBook+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		04B7C22D2C4605060054BF88 /* PokeFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeFile.swift; sourceTree = "<group>"; };
 		04B7C22F2C460E5A0054BF88 /* PhoneBookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneBookViewController.swift; sourceTree = "<group>"; };
+		04B7C2372C4838820054BF88 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,8 +54,6 @@
 		04B7C1FD2C452CA40054BF88 = {
 			isa = PBXGroup;
 			children = (
-				04B7C2292C4559930054BF88 /* PhoneBook+CoreDataClass.swift */,
-				04B7C22A2C4559930054BF88 /* PhoneBook+CoreDataProperties.swift */,
 				04B7C2082C452CA40054BF88 /* PoketmonAdress */,
 				04B7C2072C452CA40054BF88 /* Products */,
 			);
@@ -70,11 +70,11 @@
 		04B7C2082C452CA40054BF88 /* PoketmonAdress */ = {
 			isa = PBXGroup;
 			children = (
+				04B7C2092C452CA40054BF88 /* AppDelegate.swift */,
+				04B7C20B2C452CA40054BF88 /* SceneDelegate.swift */,
 				04B7C2272C4534E20054BF88 /* Controller */,
 				04B7C2262C4534DC0054BF88 /* View */,
 				04B7C2252C4534D20054BF88 /* Model */,
-				04B7C2092C452CA40054BF88 /* AppDelegate.swift */,
-				04B7C20B2C452CA40054BF88 /* SceneDelegate.swift */,
 				04B7C2152C452CA60054BF88 /* Assets.xcassets */,
 				04B7C2172C452CA60054BF88 /* LaunchScreen.storyboard */,
 				04B7C21A2C452CA60054BF88 /* Info.plist */,
@@ -87,6 +87,8 @@
 			isa = PBXGroup;
 			children = (
 				04B7C22D2C4605060054BF88 /* PokeFile.swift */,
+				04B7C2292C4559930054BF88 /* PhoneBook+CoreDataClass.swift */,
+				04B7C22A2C4559930054BF88 /* PhoneBook+CoreDataProperties.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -95,6 +97,7 @@
 			isa = PBXGroup;
 			children = (
 				04B7C2232C4534180054BF88 /* TableViewCell.swift */,
+				04B7C2372C4838820054BF88 /* MainView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 				04B7C2302C460E5A0054BF88 /* PhoneBookViewController.swift in Sources */,
 				04B7C22E2C4605060054BF88 /* PokeFile.swift in Sources */,
 				04B7C2242C4534180054BF88 /* TableViewCell.swift in Sources */,
+				04B7C2382C4838820054BF88 /* MainView.swift in Sources */,
 				04B7C20E2C452CA40054BF88 /* ViewController.swift in Sources */,
 				04B7C20A2C452CA40054BF88 /* AppDelegate.swift in Sources */,
 				04B7C2142C452CA40054BF88 /* PoketmonAdress.xcdatamodeld in Sources */,
